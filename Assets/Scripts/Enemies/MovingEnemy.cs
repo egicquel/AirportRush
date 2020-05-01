@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 public class MovingEnemy : HumanEnemy
 {
     [SerializeField]
-    private float moveSpeed;
+    private float moveSpeed = 1f;
     
     private List<Vector3> movementPoints;
     private int movementPointIndex = 0;
