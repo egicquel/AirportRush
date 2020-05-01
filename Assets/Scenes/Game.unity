@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 1148414859}
   - component: {fileID: 1148414858}
   - component: {fileID: 1148414860}
+  - component: {fileID: 1148414861}
   m_Layer: 0
   m_Name: PlayableCharacter
   m_TagString: Untagged
@@ -313,3 +314,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26316a73ecf0cf4438c4cb4b9e55c4f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCarryingSuitcase: 0
+  suitcaseWeight: 0
+  characterSpeed: 7
+  velocity: 0
+  impactLevelRisk: 0
+  losingClothesRisk: 0
+--- !u!50 &1148414861
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148414857}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
