@@ -55,16 +55,16 @@ public class PlayableCharacter : MonoBehaviour
     private void FixedUpdate()
     {
         if (Input.GetAxis("Vertical") > 0) {
-            rb.AddForce(transform.up * speedModificator);
-        } else if (Input.GetAxis("Vertical") < 0) {
             rb.AddForce(-transform.up * speedModificator);
+        } else if (Input.GetAxis("Vertical") < 0) {
+            rb.AddForce(transform.up * speedModificator);
         } else if (Input.GetAxis("Horizontal") > 0) {
-            rb.AddForce(transform.right * speedModificator);
-        } else if (Input.GetAxis("Horizontal") < 0) {
             rb.AddForce(-transform.right * speedModificator);
+        } else if (Input.GetAxis("Horizontal") < 0) {
+            rb.AddForce(transform.right * speedModificator);
         }
 
-        rb.MovePosition(rb.position + movement * characterSpeed * Time.fixedDeltaTime * (isRunning ? 1.60f : 1));
+        rb.position = (rb.position + movement * characterSpeed * Time.fixedDeltaTime * (isRunning ? 1.60f : 1));
     }
 
     // Charactere lost his Suitcase and refresh velocity
@@ -117,12 +117,12 @@ public class PlayableCharacter : MonoBehaviour
     // This will define the impacts level and the charactere speed
     private void UpdateVelocity()
     {
-        /*if (isCarryingSuitcase)
+        if (isCarryingSuitcase)
         {
-            speedModificator *= (suitcaseWeight / 1000);
+            speedModificator -= (suitcaseWeight / 1000);
         } else {
-           speedModificator /= (suitcaseWeight / 1000);
-        }*/
+            speedModificator += (suitcaseWeight / 1000);
+        }
         impactLevelRisk = 1 / (suitcaseWeight / 10);
     }
 }
