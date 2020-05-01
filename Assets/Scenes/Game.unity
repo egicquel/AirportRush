@@ -160,6 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7469cb68f28bc75498895720ff9132a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraOffset: 2
+  interpolant: 0.5
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
