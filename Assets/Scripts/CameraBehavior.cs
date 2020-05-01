@@ -3,10 +3,10 @@
 public class CameraBehavior : MonoBehaviour
 {
     [SerializeField]
-    private float cameraOffset;
+    private float cameraOffset = 0f;
     [SerializeField]
     [Range(0f, 1f)]
-    private float interpolant;
+    private float interpolant = 0.5f;
     
     private Transform characterTransform;
 
