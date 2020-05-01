@@ -5,14 +5,14 @@ using UnityEngine.Events;
 
 public class PlayableCharacter : MonoBehaviour
 {
-    public bool isCarryingSuitcase;
-    public int  suitcaseWeight;
-    public float  characterSpeed = 7f;
-    public int  velocity;
-    public int  impactLevelRisk;
-    public int  losingClothesRisk;
+    public bool   isCarryingSuitcase;
+    public bool   isRunning;
+    public int    suitcaseWeight;
+    public float  characterSpeed = 3f;
+    public int    speedModificator = 1;
+    public int    impactLevelRisk;
 
-    private Vector3 movement = Vector3.zero;
+    private Vector2 movement;
     private Rigidbody2D rb;
 
 
@@ -21,6 +21,7 @@ public class PlayableCharacter : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
+        isRunning = false;
         isCarryingSuitcase = true;
         suitcaseWeight = 1000;
         this.UpdateVelocity();
@@ -29,32 +30,33 @@ public class PlayableCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("Sprint")) {
+            this.StartRunning();
+        }
+        if (Input.GetButtonUp("Sprint")) {
+            this.StopRunning();
+        }
 
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
     }
 
     private void FixedUpdate()
     {
-        if (Input.GetAxis("Vertical") > 0)
-        {
-            rb.AddForce(transform.up * characterSpeed);
+        if (Input.GetAxis("Vertical") > 0) {
+            rb.AddForce(transform.up * speedModificator);
+        } else if (Input.GetAxis("Vertical") < 0) {
+            rb.AddForce(-transform.up * speedModificator);
+        } else if (Input.GetAxis("Horizontal") > 0) {
+            rb.AddForce(transform.right * speedModificator);
+        } else if (Input.GetAxis("Horizontal") < 0) {
+            rb.AddForce(-transform.right * speedModificator);
         }
-        if (Input.GetAxis("Vertical") < 0)
+        if ( isRunning )
         {
-            rb.AddForce(-transform.up * characterSpeed);
-        }
-        if (Input.GetAxis("Horizontal") > 0)
-        {
-            rb.AddForce(transform.right * characterSpeed);
-        }
-        if (Input.GetAxis("Horizontal") < 0)
-        {
-            rb.AddForce(-transform.right * characterSpeed);
-        }
-        // TODO A changer averc le check vélocity quand il sera pret
-        if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0)
-        {
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = 0;
+            rb.MovePosition(rb.position + movement * characterSpeed * Time.fixedDeltaTime * 1.75f);
+        } else {
+            rb.MovePosition(rb.position + movement * characterSpeed * Time.fixedDeltaTime);
         }
     }
 
@@ -69,6 +71,20 @@ public class PlayableCharacter : MonoBehaviour
     public void PickupSuitcase()
     {
         isCarryingSuitcase = true;
+        this.UpdateVelocity();
+    }
+
+    // Charatere start Runing
+    public void StartRunning()
+    {
+        isRunning = true;
+        this.UpdateVelocity();
+    }
+
+    // Charatere stop Runing
+    public void StopRunning()
+    {
+        isRunning = false;
         this.UpdateVelocity();
     }
 
@@ -88,9 +104,15 @@ public class PlayableCharacter : MonoBehaviour
         this.UpdateVelocity();
     }
 
-    // This will define the lose % rate of clothes, the impacts level and the charactere speed
+    // This will define the impacts level and the charactere speed
     private void UpdateVelocity()
     {
-
+        /*if (isCarryingSuitcase)
+        {
+            speedModificator *= (suitcaseWeight / 1000);
+        } else {
+           speedModificator /= (suitcaseWeight / 1000);
+        }*/
+        impactLevelRisk = 1 / (suitcaseWeight / 10);
     }
 }
