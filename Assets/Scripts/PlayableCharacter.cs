@@ -27,6 +27,7 @@ public class PlayableCharacter : MonoBehaviour
 
     private bool isOnTheGround = false;
     private bool isUnstable = false;
+    private bool cannotFall = false;
     private float steadiness;
     private Vector2 movement;
     private Rigidbody2D rb;
@@ -135,8 +136,8 @@ public class PlayableCharacter : MonoBehaviour
         }
         Vector2 wantedVelocity = new Vector2(horizontalAxis, verticalAxis) * characterSpeed * Time.fixedDeltaTime * (isRunning ? runningMultiplicator : 1f);
         if (isUnstable) {
-            wantedVelocity.x = (wantedVelocity.x != 0 ? wantedVelocity.x : Random.Range(-1f, 1f)) * Random.Range(0.1f, 1.5f);
-            wantedVelocity.y = (wantedVelocity.y != 0 ? wantedVelocity.y : Random.Range(-1f, 1f)) * Random.Range(0.1f, 1.5f);
+            wantedVelocity.x = (wantedVelocity.x != 0 ? wantedVelocity.x : Random.Range(-25f, 25f)) * Random.Range(0.5f, 1.5f);
+            wantedVelocity.y = (wantedVelocity.y != 0 ? wantedVelocity.y : Random.Range(-25f, 25f)) * Random.Range(0.5f, 1.5f);
         }
 
         if (IsVelocityUnderThreshold(wantedVelocity)) {
@@ -156,30 +157,40 @@ public class PlayableCharacter : MonoBehaviour
     }
 
     public void HitAdult() {
-        if (isUnstable) {
+        if (isUnstable && !cannotFall) {
             Fall();
         }
         else if (isRunning && isCarryingSuitcase) {
-            BecomeUnstable();
+            BecomeUnstable(unstableTime, 0.5f);
         }
     }
 
     public void HitKid() {
         if (isRunning) {
             LoseClothes();
-            rb.velocity = Vector2.zero;
+            BecomeUnstable(0.25f, 0.25f);
         }
     }
 
-    private void BecomeUnstable() {
+    public void HitBall() {
+        Fall();
+    }
+
+    private void BecomeUnstable(float tUnstable, float tInvulnerability) {
         isUnstable = true;
+        cannotFall = true;
         animator.SetBool("isUnstable", isUnstable);
-        Invoke("BecomeStable", unstableTime);
+        Invoke("BecomeStable", tUnstable);
+        Invoke("EndInvulnerability", tInvulnerability);
     }
 
     private void BecomeStable() {
         isUnstable = false;
         animator.SetBool("isUnstable", isUnstable);
+    }
+
+    private void EndInvulnerability() {
+        cannotFall = false;
     }
 
     private void Fall() {
@@ -200,11 +211,13 @@ public class PlayableCharacter : MonoBehaviour
     // Charactere lost his Suitcase and refresh velocity
     public void DropSuitcase()
     {
-        suitcase.transform.position = transform.position;
-        suitcase.SetActive(true);
-        isCarryingSuitcase = false;
-        animator.SetBool("hasSuitcase", isCarryingSuitcase);
-        this.UpdateVelocity();
+        if (isCarryingSuitcase) {
+            suitcase.transform.position = transform.position;
+            suitcase.SetActive(true);
+            isCarryingSuitcase = false;
+            animator.SetBool("hasSuitcase", isCarryingSuitcase);
+            this.UpdateVelocity();
+        }
     }
 
     // Chartactere pick up his SuitCase and refresh velocity

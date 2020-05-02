@@ -99,13 +99,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCarryingSuitcase: 0
   isRunning: 0
+  canGrabSuitcase: 0
   suitcaseWeight: 0
-  characterSpeed: 75
+  characterSpeed: 150
   speedModificator: 1
   impactLevelRisk: 0
-  runningMultiplicator: 1.6
-  unstableTime: 0.8
-  fallenTime: 0.8
+  runningMultiplicator: 2.5
+  unstableTime: 2
+  fallenTime: 1.5
   steadinessMax: 1
   steadinessMin: 0.1
   suitcase: {fileID: 0}
@@ -121,7 +122,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 7.5
   m_LinearDrag: 0
   m_AngularDrag: 1000000
   m_GravityScale: 0

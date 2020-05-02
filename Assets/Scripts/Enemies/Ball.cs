@@ -19,7 +19,7 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision) {
         PlayableCharacter character = collision.collider.gameObject.GetComponent<PlayableCharacter>();
         if (character != null) {
-            character.HitKid();
+            character.HitBall();
         }
     }
 }
