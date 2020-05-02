@@ -175,7 +175,7 @@ public class PlayableCharacter : MonoBehaviour
         Fall();
     }
 
-    private void BecomeUnstable(float tUnstable, float tInvulnerability) {
+    public void BecomeUnstable(float tUnstable, float tInvulnerability) {
         isUnstable = true;
         cannotFall = true;
         animator.SetBool("isUnstable", isUnstable);
@@ -268,13 +268,5 @@ public class PlayableCharacter : MonoBehaviour
             speedModificator += (suitcaseWeight / 1000);
         }
         impactLevelRisk = 1 / (suitcaseWeight / 10);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.tag == "Wall") {
-            if (isRunning) {
-                Fall();
-            }
-        }
     }
 }

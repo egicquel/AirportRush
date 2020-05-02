@@ -93,9 +93,9 @@ GameObject:
   - component: {fileID: 495737770955889651}
   - component: {fileID: 495737770955889650}
   - component: {fileID: 495737770955889660}
-  - component: {fileID: 1809262175640980312}
+  - component: {fileID: 4411584374399092906}
   m_Layer: 0
-  m_Name: MovingEnemy
+  m_Name: MovingKid
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,7 +156,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: f582fef401607034faf91570e129031f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff60549531c34284e9152d205fe370fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -180,11 +180,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySprites:
-  - {fileID: 21300000, guid: f582fef401607034faf91570e129031f, type: 3}
-  - {fileID: 21300000, guid: e6d3dce0a5d9d2644b6b74ac405997a1, type: 3}
-  - {fileID: 21300000, guid: ce226c9d117963d4d8b8756f8e8c5919, type: 3}
-  - {fileID: 21300000, guid: 6b48299dd65ac344d8e3a0e93c609769, type: 3}
-  moveSpeed: 2
+  - {fileID: 21300000, guid: ff60549531c34284e9152d205fe370fe, type: 3}
+  - {fileID: 21300000, guid: 70e963195db324c4c85ed3500e300844, type: 3}
+  moveSpeed: 4
   grumpyDuration: 1
 --- !u!50 &495737770955889660
 Rigidbody2D:
@@ -198,7 +196,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 50
+  m_Mass: 25
   m_LinearDrag: 2
   m_AngularDrag: 1000000
   m_GravityScale: 0
@@ -207,7 +205,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &1809262175640980312
+--- !u!61 &4411584374399092906
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,18 +218,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.008861542, y: -0.017733037}
+  m_Offset: {x: -0.010228038, y: -0.081871}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 0.2, y: 0.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.564424, y: 0.5528736}
+  m_Size: {x: 0.8929589, y: 0.33917993}
   m_EdgeRadius: 0
 --- !u!1 &495737771156160947
 GameObject:
