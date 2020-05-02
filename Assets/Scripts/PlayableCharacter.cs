@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PlayableCharacter : MonoBehaviour
 {
+    [SerializeField]public Cloth[] clothTab;
+    private int[] clothWeightTab = {50,100,150,200};
+
     public bool   isCarryingSuitcase;
     public bool   isRunning;
-    public bool   canGrabSuitcase;
     public int    suitcaseWeight;
     public float  characterSpeed = 8f;
     public int    speedModificator = 1;
-    public int    impactLevelRisk;
     [SerializeField]
     public float runningMultiplicator = 1.6f;
     [SerializeField]
@@ -46,7 +47,6 @@ public class PlayableCharacter : MonoBehaviour
         isRunning = false;
         isCarryingSuitcase = true;
         animator.SetBool("hasSuitcase", isCarryingSuitcase);
-        canGrabSuitcase = false;
         suitcaseWeight = 1000;
         this.UpdateVelocity();
     }
@@ -67,7 +67,7 @@ public class PlayableCharacter : MonoBehaviour
         {
             this.DropSuitcase();
         }
-        if (Input.GetButtonDown("Interact") && !isCarryingSuitcase && canGrabSuitcase)
+        if (Input.GetButtonDown("Interact") && !isCarryingSuitcase)
         {
             this.PickupSuitcase();
         }
@@ -210,16 +210,14 @@ public class PlayableCharacter : MonoBehaviour
     // Charactere lost his Suitcase and refresh velocity
     public void DropSuitcase()
     {
-        if (isCarryingSuitcase) {
-            suitcase.transform.position = transform.position;
-            suitcase.SetActive(true);
-            isCarryingSuitcase = false;
-            animator.SetBool("hasSuitcase", isCarryingSuitcase);
-            this.UpdateVelocity();
-        }
+        suitcase.transform.position = transform.position;
+        suitcase.SetActive(true);
+        isCarryingSuitcase = false;
+        animator.SetBool("hasSuitcase", isCarryingSuitcase);
+        this.UpdateVelocity();
     }
 
-    // Chartactere pick up his SuitCase and refresh velocity
+    // Charactere pick up his SuitCase and refresh velocity
     public void PickupSuitcase()
     {
         suitcase.SetActive(false);
@@ -243,18 +241,18 @@ public class PlayableCharacter : MonoBehaviour
     }
 
     // Charatere lose a random clothes from his suitcase and refresh his velocity
-    public int LoseClothes()
+    public void LoseClothes()
     {
-        int clothesWeight = Random.Range(50,200);
-        suitcaseWeight -= clothesWeight;
+        Cloth lostCloth = this.GenerateRandomCloth();
+        suitcaseWeight -= lostCloth.GetWeight();
         this.UpdateVelocity();
-        return clothesWeight;
     }
 
     // Charatere pick up a close, add his weight to the suitcase and update his velocity
-    public void PickupClothes(int clothesWeight)
+    public void PickupClothes(Cloth cloth)
     {
-        suitcaseWeight += clothesWeight;
+        cloth.gameObject.SetActive(false);
+        suitcaseWeight += cloth.GetWeight();
         this.UpdateVelocity();
     }
 
@@ -267,6 +265,16 @@ public class PlayableCharacter : MonoBehaviour
         } else {
             speedModificator += (suitcaseWeight / 1000);
         }
-        impactLevelRisk = 1 / (suitcaseWeight / 10);
+    }
+
+    //Generate a cloth and his throw destination and return it
+    private Cloth GenerateRandomCloth()
+    {
+        int clothType = Random.Range(0, 3);
+        Vector3 clothThrow = new Vector3(Random.Range(2,6), Random.Range(2,6), 0);
+        Cloth generatedCloth = Instantiate(clothTab[clothType]).GetComponent<Cloth>();
+        generatedCloth.SetWeight(this.clothWeightTab[clothType]);
+        generatedCloth.transform.position = transform.position + clothThrow;
+        return generatedCloth;
     }
 }
