@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayableCharacter : MonoBehaviour
 {
@@ -14,6 +13,7 @@ public class PlayableCharacter : MonoBehaviour
 
     private Vector2 movement;
     private Rigidbody2D rb;
+    [SerializeField] public GameObject suitcase;
 
 
     // Start is called before the first frame update
@@ -30,11 +30,22 @@ public class PlayableCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Event Listener Sprint
         if (Input.GetButtonDown("Sprint")) {
             this.StartRunning();
         }
         if (Input.GetButtonUp("Sprint")) {
             this.StopRunning();
+        }
+
+        //Event Listener Suitcase
+        if (Input.GetButtonDown("DropSuitcase") && isCarryingSuitcase)
+        {
+            this.DropSuitcase();
+        }
+        if (Input.GetButtonDown("Interact") && !isCarryingSuitcase)
+        {
+            this.PickupSuitcase();
         }
 
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -44,25 +55,23 @@ public class PlayableCharacter : MonoBehaviour
     private void FixedUpdate()
     {
         if (Input.GetAxis("Vertical") > 0) {
-            rb.AddForce(transform.up * speedModificator);
-        } else if (Input.GetAxis("Vertical") < 0) {
             rb.AddForce(-transform.up * speedModificator);
+        } else if (Input.GetAxis("Vertical") < 0) {
+            rb.AddForce(transform.up * speedModificator);
         } else if (Input.GetAxis("Horizontal") > 0) {
-            rb.AddForce(transform.right * speedModificator);
-        } else if (Input.GetAxis("Horizontal") < 0) {
             rb.AddForce(-transform.right * speedModificator);
+        } else if (Input.GetAxis("Horizontal") < 0) {
+            rb.AddForce(transform.right * speedModificator);
         }
-        if ( isRunning )
-        {
-            rb.MovePosition(rb.position + movement * characterSpeed * Time.fixedDeltaTime * 1.75f);
-        } else {
-            rb.MovePosition(rb.position + movement * characterSpeed * Time.fixedDeltaTime);
-        }
+
+        rb.position = (rb.position + movement * characterSpeed * Time.fixedDeltaTime * (isRunning ? 1.60f : 1));
     }
 
     // Charactere lost his Suitcase and refresh velocity
     public void DropSuitcase()
     {
+        suitcase.transform.position = transform.position;
+        suitcase.SetActive(true);
         isCarryingSuitcase = false;
         this.UpdateVelocity();
     }
@@ -70,6 +79,7 @@ public class PlayableCharacter : MonoBehaviour
     // Chartactere pick up his SuitCase and refresh velocity
     public void PickupSuitcase()
     {
+        suitcase.SetActive(false);
         isCarryingSuitcase = true;
         this.UpdateVelocity();
     }
@@ -107,12 +117,12 @@ public class PlayableCharacter : MonoBehaviour
     // This will define the impacts level and the charactere speed
     private void UpdateVelocity()
     {
-        /*if (isCarryingSuitcase)
+        if (isCarryingSuitcase)
         {
-            speedModificator *= (suitcaseWeight / 1000);
+            speedModificator -= (suitcaseWeight / 1000);
         } else {
-           speedModificator /= (suitcaseWeight / 1000);
-        }*/
+            speedModificator += (suitcaseWeight / 1000);
+        }
         impactLevelRisk = 1 / (suitcaseWeight / 10);
     }
 }
