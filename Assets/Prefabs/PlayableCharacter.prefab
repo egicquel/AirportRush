@@ -78,7 +78,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 4.94, y: 3.13}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -99,9 +99,11 @@ MonoBehaviour:
   isCarryingSuitcase: 0
   isRunning: 0
   suitcaseWeight: 0
-  characterSpeed: 3
+  characterSpeed: 8
   speedModificator: 1
   impactLevelRisk: 0
+  steadinessMax: 1
+  steadinessMin: 0.1
   suitcase: {fileID: 0}
 --- !u!50 &1565567940969601612
 Rigidbody2D:
