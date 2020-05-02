@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayableCharacter : MonoBehaviour
@@ -269,5 +268,13 @@ public class PlayableCharacter : MonoBehaviour
             speedModificator += (suitcaseWeight / 1000);
         }
         impactLevelRisk = 1 / (suitcaseWeight / 10);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Wall") {
+            if (isRunning) {
+                Fall();
+            }
+        }
     }
 }
