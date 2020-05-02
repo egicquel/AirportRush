@@ -86,9 +86,11 @@ public class MovingEnemy : HumanEnemy {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.collider.gameObject.tag == "Player") {
+        PlayableCharacter character = collision.collider.gameObject.GetComponent<PlayableCharacter>();
+        if (character != null) {
             grumpyTimer = grumpyDuration;
-            transform.rotation = GetDirectionTowards(collision.collider.gameObject.transform.position);
+            transform.rotation = GetDirectionTowards(character.gameObject.transform.position);
+            character.HitAdult();
         }
     }
 }
