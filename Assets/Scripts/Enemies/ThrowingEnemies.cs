@@ -22,7 +22,7 @@ public class ThrowingEnemies : MonoBehaviour {
     private float timerThrow = 0f;
     private Vector3 loosePosition;
 
-    private new Renderer renderer;
+    private Renderer renderer;
 
     // Start is called before the first frame update
     void Start() {
