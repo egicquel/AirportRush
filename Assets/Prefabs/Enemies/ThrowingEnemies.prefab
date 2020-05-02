@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912980347835422471}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.55, y: 0, z: 0}
+  m_LocalPosition: {x: -0.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4912980348248869695}
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f582fef401607034faf91570e129031f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff60549531c34284e9152d205fe370fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,10 +95,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySprites:
-  - {fileID: 21300000, guid: f582fef401607034faf91570e129031f, type: 3}
-  - {fileID: 21300000, guid: e6d3dce0a5d9d2644b6b74ac405997a1, type: 3}
-  - {fileID: 21300000, guid: ce226c9d117963d4d8b8756f8e8c5919, type: 3}
-  - {fileID: 21300000, guid: 6b48299dd65ac344d8e3a0e93c609769, type: 3}
+  - {fileID: 21300000, guid: ff60549531c34284e9152d205fe370fe, type: 3}
+  - {fileID: 21300000, guid: 70e963195db324c4c85ed3500e300844, type: 3}
 --- !u!1 &4912980348088161890
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +164,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.5867954, y: -0.04560119}
+  m_Offset: {x: 0.6458796, y: -0.018733054}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -177,7 +175,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5076405, y: 1.2716204}
+  m_Size: {x: 0.389472, y: 0.9814442}
   m_EdgeRadius: 0
 --- !u!1 &4912980348095493844
 GameObject:
@@ -206,7 +204,7 @@ Transform:
   m_GameObject: {fileID: 4912980348095493844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4912980349290955643}
   m_RootOrder: 0
@@ -250,7 +248,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: ff8b3a7dce6893d48955568fddc28648, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -344,7 +342,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.59818953, y: 0.06270075}
+  m_Offset: {x: -0.6132543, y: 0.00618279}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -355,7 +353,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5304283, y: 1.3514225}
+  m_Size: {x: 0.37978053, y: 0.86160135}
   m_EdgeRadius: 0
 --- !u!1 &4912980349232618262
 GameObject:
@@ -383,7 +381,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4912980349232618262}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.55, y: 0, z: 0}
+  m_LocalPosition: {x: 0.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4912980348088161889}
@@ -428,7 +426,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f582fef401607034faf91570e129031f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff60549531c34284e9152d205fe370fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -452,10 +450,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySprites:
-  - {fileID: 21300000, guid: f582fef401607034faf91570e129031f, type: 3}
-  - {fileID: 21300000, guid: e6d3dce0a5d9d2644b6b74ac405997a1, type: 3}
-  - {fileID: 21300000, guid: ce226c9d117963d4d8b8756f8e8c5919, type: 3}
-  - {fileID: 21300000, guid: 6b48299dd65ac344d8e3a0e93c609769, type: 3}
+  - {fileID: 21300000, guid: ff60549531c34284e9152d205fe370fe, type: 3}
+  - {fileID: 21300000, guid: 70e963195db324c4c85ed3500e300844, type: 3}
 --- !u!1 &4912980349290955637
 GameObject:
   m_ObjectHideFlags: 0
