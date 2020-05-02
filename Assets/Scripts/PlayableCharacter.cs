@@ -12,16 +12,24 @@ public class PlayableCharacter : MonoBehaviour
     public int    speedModificator = 1;
     public int    impactLevelRisk;
     [SerializeField]
+    public float runningMultiplicator = 1.6f;
+    [SerializeField]
+    public float unstableTime = 1.5f;
+    [SerializeField]
+    public float fallenTime = 0.8f;
+    [SerializeField]
     [Range(0f, 1f)]
     public float steadinessMax = 1f;
     [SerializeField]
     [Range(0f, 1f)]
     public float steadinessMin = 0.1f;
 
+    private bool isOnTheGround = false;
+    private bool isUnstable = false;
     private float steadiness;
     private Vector2 movement;
     private Rigidbody2D rb;
-    private AnimatorController animator;
+    private Animator animator;
     [SerializeField] public GameObject suitcase;
 
 
@@ -29,11 +37,12 @@ public class PlayableCharacter : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<AnimatorController>();
+        animator = GetComponent<Animator>();
 
         steadiness = steadinessMin;
         isRunning = false;
         isCarryingSuitcase = true;
+        animator.SetBool("hasSuitcase", isCarryingSuitcase);
         suitcaseWeight = 1000;
         this.UpdateVelocity();
     }
@@ -76,7 +85,28 @@ public class PlayableCharacter : MonoBehaviour
         }
 
         rb.position = (rb.position + movement * characterSpeed * Time.fixedDeltaTime * (isRunning ? 1.60f : 1));*/
-        Vector2 wantedVelocity = new Vector2(Input.GetAxis("Horizontal") * characterSpeed, Input.GetAxis("Vertical") * characterSpeed);
+
+        if (isOnTheGround) {
+            rb.velocity = Vector2.zero;
+            return;
+        }
+
+        float horizontalAxis = Input.GetAxis("Horizontal");
+        float verticalAxis = Input.GetAxis("Vertical");
+        if (IsMoveButtonsPressed(horizontalAxis, verticalAxis)) {
+            float characterAngle = Mathf.Atan2(-horizontalAxis, verticalAxis) * Mathf.Rad2Deg;
+            rb.rotation = characterAngle;
+            animator.SetBool("isWalking", true);
+        }
+        else {
+            animator.SetBool("isWalking", false);
+        }
+        Vector2 wantedVelocity = new Vector2(horizontalAxis, verticalAxis) * characterSpeed * Time.fixedDeltaTime * (isRunning ? runningMultiplicator : 1f);
+        if (isUnstable) {
+            wantedVelocity.x = (wantedVelocity.x != 0 ? wantedVelocity.x : Random.Range(-1f, 1f)) * Random.Range(0.1f, 1.5f);
+            wantedVelocity.y = (wantedVelocity.y != 0 ? wantedVelocity.y : Random.Range(-1f, 1f)) * Random.Range(0.1f, 1.5f);
+        }
+        Debug.Log(IsVelocityUnderThreshold(wantedVelocity));
         if (IsVelocityUnderThreshold(wantedVelocity)) {
             rb.velocity = wantedVelocity;
         }
@@ -86,7 +116,53 @@ public class PlayableCharacter : MonoBehaviour
     }
 
     private bool IsVelocityUnderThreshold(Vector2 velocity) {
-        return rb.velocity.x < characterSpeed / 2f && rb.velocity.y < characterSpeed / 2f && rb.velocity.x > characterSpeed / -2f && rb.velocity.y > characterSpeed / -2f;
+        return velocity.x < 0.5f && velocity.x > -0.5f && velocity.y < 0.5f && velocity.y > -0.5f;
+    }
+
+    private bool IsMoveButtonsPressed(float horizontalAxis, float verticalAxis) {
+        return horizontalAxis < -0.2 || horizontalAxis > 0.2 || verticalAxis < -0.2 || verticalAxis > 0.2;
+    }
+
+    public void HitAdult() {
+        if (isUnstable) {
+            Fall();
+        }
+        else if (isRunning && isCarryingSuitcase) {
+            BecomeUnstable();
+        }
+    }
+
+    public void HitKid() {
+        if (isRunning) {
+            LoseClothes();
+            rb.velocity = Vector2.zero;
+        }
+    }
+
+    private void BecomeUnstable() {
+        isUnstable = true;
+        animator.SetBool("isUnstable", isUnstable);
+        Invoke("BecomeStable", unstableTime);
+    }
+
+    private void BecomeStable() {
+        isUnstable = false;
+        animator.SetBool("isUnstable", isUnstable);
+    }
+
+    private void Fall() {
+        isOnTheGround = true;
+        isUnstable = false;
+        animator.SetBool("isUnstable", isUnstable);
+        animator.SetBool("isFallen", isOnTheGround);
+        DropSuitcase();
+        LoseClothes();
+        Invoke("GetUp", fallenTime);
+    }
+
+    private void GetUp() {
+        isOnTheGround = false;
+        animator.SetBool("isFallen", isOnTheGround);
     }
 
     // Charactere lost his Suitcase and refresh velocity
@@ -95,6 +171,7 @@ public class PlayableCharacter : MonoBehaviour
         suitcase.transform.position = transform.position;
         suitcase.SetActive(true);
         isCarryingSuitcase = false;
+        animator.SetBool("hasSuitcase", isCarryingSuitcase);
         this.UpdateVelocity();
     }
 
@@ -103,6 +180,7 @@ public class PlayableCharacter : MonoBehaviour
     {
         suitcase.SetActive(false);
         isCarryingSuitcase = true;
+        animator.SetBool("hasSuitcase", isCarryingSuitcase);
         this.UpdateVelocity();
     }
 

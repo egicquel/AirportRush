@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1565567940969601613}
   - component: {fileID: 1565567940969601612}
   - component: {fileID: 1565567940969601615}
+  - component: {fileID: 7012870835786519306}
   m_Layer: 0
   m_Name: PlayableCharacter
   m_TagString: Untagged
@@ -99,9 +100,12 @@ MonoBehaviour:
   isCarryingSuitcase: 0
   isRunning: 0
   suitcaseWeight: 0
-  characterSpeed: 8
+  characterSpeed: 75
   speedModificator: 1
   impactLevelRisk: 0
+  runningMultiplicator: 1.6
+  unstableTime: 0.8
+  fallenTime: 0.8
   steadinessMax: 1
   steadinessMin: 0.1
   suitcase: {fileID: 0}
@@ -119,7 +123,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1000000
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -145,3 +149,29 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &7012870835786519306
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565567940969601608}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.047571152, y: -0.0594531}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3, y: 3}
+    newSize: {x: 4.94, y: 3.13}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.3468451, y: 0.47655874}
+  m_EdgeRadius: 0
