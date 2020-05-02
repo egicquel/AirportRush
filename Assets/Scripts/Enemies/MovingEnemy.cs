@@ -10,12 +10,18 @@ public class MovingEnemy : HumanEnemy {
     //[SerializeField]
     //private float rotationSpeed = 180f;
 
+    [SerializeField]
+    private float grumpyDuration = 1f;
+
+    private bool isGrumpy = false;
+    private float grumpyTimer = 0f;
+
     private List<Vector3> movementPoints;
     private int movementPointIndex = 0;
     private bool isForward = true;
 
     private new Renderer renderer;
-    
+
     // Start is called before the first frame update
     new void Start() {
         base.Start();
@@ -26,8 +32,19 @@ public class MovingEnemy : HumanEnemy {
     // Update is called once per frame
     void Update() {
         if (renderer.isVisible) {
-            if (movementPoints.Count > 1) {
-                move();
+            if (grumpyTimer > 0) {
+                if (!isGrumpy) {
+                    isGrumpy = true;
+                }
+                grumpyTimer -= Time.deltaTime;
+            }
+            else {
+                if (isGrumpy) {
+                    isGrumpy = false;
+                }
+                if (movementPoints.Count > 1) {
+                    move();
+                }
             }
         }
     }
@@ -66,5 +83,12 @@ public class MovingEnemy : HumanEnemy {
             }
         }
         return movementPoints;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.collider.gameObject.tag == "Player") {
+            grumpyTimer = grumpyDuration;
+            transform.rotation = GetDirectionTowards(collision.collider.gameObject.transform.position);
+        }
     }
 }

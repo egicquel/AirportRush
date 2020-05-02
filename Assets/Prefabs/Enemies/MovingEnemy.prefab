@@ -185,6 +185,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ce226c9d117963d4d8b8756f8e8c5919, type: 3}
   - {fileID: 21300000, guid: 6b48299dd65ac344d8e3a0e93c609769, type: 3}
   moveSpeed: 2
+  grumpyDuration: 1
 --- !u!58 &495737770955889661
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -214,8 +215,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 5
+  m_AngularDrag: 1000000
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
