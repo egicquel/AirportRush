@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Thing : Object
+public class Cloth : Object
 {
-
     private int weight;
     // Start is called before the first frame update
     void Start()
@@ -15,11 +14,12 @@ public class Thing : Object
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(player);
         if (IsInRange())
         {
             if (Input.GetButtonDown("Interact"))
             {
-                player.PickupClothes(weight);
+                player.PickupClothes(this);
             }
         }
     }

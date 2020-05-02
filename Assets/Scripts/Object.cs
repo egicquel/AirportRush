@@ -16,6 +16,7 @@ public class Object : MonoBehaviour
     protected void Initialize()
     {
         animator = GetComponent<Animator>();
+        player = FindObjectOfType<PlayableCharacter>();
     }
 
     // Update is called once per frame
