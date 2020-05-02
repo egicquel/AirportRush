@@ -6,7 +6,7 @@ public class HumanEnemy : MonoBehaviour
 {
     [Header("Sprites")]
     [SerializeField]
-    private Sprite[] enemySprites;
+    private Sprite[] enemySprites = default;
     
     // Start is called before the first frame update
     public void Start() {

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7044812168525577642}
   - component: {fileID: 3514436808211124634}
-  - component: {fileID: 7090214037451017298}
   - component: {fileID: 7338494696405625002}
   - component: {fileID: 6928336612609386494}
+  - component: {fileID: 1455225828291895273}
   m_Layer: 0
   m_Name: StaticEnemy
   m_TagString: Enemy
@@ -84,22 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &7090214037451017298
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7447049792216916488}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.1
 --- !u!50 &7338494696405625002
 Rigidbody2D:
   serializedVersion: 4
@@ -113,8 +97,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 5
+  m_AngularDrag: 1000000
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -138,3 +122,30 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e6d3dce0a5d9d2644b6b74ac405997a1, type: 3}
   - {fileID: 21300000, guid: ce226c9d117963d4d8b8756f8e8c5919, type: 3}
   - {fileID: 21300000, guid: 6b48299dd65ac344d8e3a0e93c609769, type: 3}
+  grumpyDuration: 2
+--- !u!61 &1455225828291895273
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7447049792216916488}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3, y: 3}
+    newSize: {x: 0.2, y: 0.2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.2673988, y: 0.5650368}
+  m_EdgeRadius: 0

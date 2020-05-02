@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayableCharacter : MonoBehaviour
@@ -8,13 +9,21 @@ public class PlayableCharacter : MonoBehaviour
     public bool   isRunning;
     public bool   canGrabSuitcase;
     public int    suitcaseWeight;
-    public float  characterSpeed = 3f;
+    public float  characterSpeed = 8f;
     public int    speedModificator = 1;
     public int    impactLevelRisk;
+    [SerializeField]
+    [Range(0f, 1f)]
+    public float steadinessMax = 1f;
+    [SerializeField]
+    [Range(0f, 1f)]
+    public float steadinessMin = 0.1f;
 
+    private float steadiness;
     private Vector2 movement;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    private AnimatorController animator;
     [SerializeField] public GameObject suitcase;
 
 
@@ -23,7 +32,9 @@ public class PlayableCharacter : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        animator = GetComponent<AnimatorController>();
 
+        steadiness = steadinessMin;
         isRunning = false;
         isCarryingSuitcase = true;
         canGrabSuitcase = false;
@@ -97,6 +108,17 @@ public class PlayableCharacter : MonoBehaviour
         }
 
         rb.position = (rb.position + movement * characterSpeed * Time.fixedDeltaTime * (isRunning ? 1.60f : 1));
+        /*Vector2 wantedVelocity = new Vector2(Input.GetAxis("Horizontal") * characterSpeed, Input.GetAxis("Vertical") * characterSpeed);
+        if (IsVelocityUnderThreshold(wantedVelocity)) {
+            rb.velocity = wantedVelocity;
+        }
+        else {
+            rb.velocity = Vector2.Lerp(rb.velocity, wantedVelocity, steadiness);
+        }*/
+    }
+
+    private bool IsVelocityUnderThreshold(Vector2 velocity) {
+        return rb.velocity.x < characterSpeed / 2f && rb.velocity.y < characterSpeed / 2f && rb.velocity.x > characterSpeed / -2f && rb.velocity.y > characterSpeed / -2f;
     }
 
     // Charactere lost his Suitcase and refresh velocity
