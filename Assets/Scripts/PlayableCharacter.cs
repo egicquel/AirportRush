@@ -6,6 +6,7 @@ public class PlayableCharacter : MonoBehaviour
 {
     public bool   isCarryingSuitcase;
     public bool   isRunning;
+    public bool   canGrabSuitcase;
     public int    suitcaseWeight;
     public float  characterSpeed = 3f;
     public int    speedModificator = 1;
@@ -13,6 +14,7 @@ public class PlayableCharacter : MonoBehaviour
 
     private Vector2 movement;
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
     [SerializeField] public GameObject suitcase;
 
 
@@ -20,9 +22,11 @@ public class PlayableCharacter : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
 
         isRunning = false;
         isCarryingSuitcase = true;
+        canGrabSuitcase = false;
         suitcaseWeight = 1000;
         this.UpdateVelocity();
     }
@@ -43,7 +47,7 @@ public class PlayableCharacter : MonoBehaviour
         {
             this.DropSuitcase();
         }
-        if (Input.GetButtonDown("Interact") && !isCarryingSuitcase)
+        if (Input.GetButtonDown("Interact") && !isCarryingSuitcase && canGrabSuitcase)
         {
             this.PickupSuitcase();
         }
@@ -54,14 +58,42 @@ public class PlayableCharacter : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetAxis("Vertical") > 0) {
-            rb.AddForce(-transform.up * speedModificator);
-        } else if (Input.GetAxis("Vertical") < 0) {
-            rb.AddForce(transform.up * speedModificator);
-        } else if (Input.GetAxis("Horizontal") > 0) {
-            rb.AddForce(-transform.right * speedModificator);
-        } else if (Input.GetAxis("Horizontal") < 0) {
-            rb.AddForce(transform.right * speedModificator);
+        // Add force if is carrying the suitcase
+        if (isCarryingSuitcase)
+        {
+            if (Input.GetAxis("Vertical") > 0)
+            {
+                rb.AddForce(-transform.up * speedModificator);
+            }
+            else if (Input.GetAxis("Vertical") < 0)
+            {
+                rb.AddForce(transform.up * speedModificator);
+            }
+            else if (Input.GetAxis("Horizontal") > 0)
+            {
+                rb.AddForce(-transform.right * speedModificator);
+            }
+            else if (Input.GetAxis("Horizontal") < 0)
+            {
+                rb.AddForce(transform.right * speedModificator);
+            }
+        }
+
+        if (Input.GetAxis("Vertical") > 0)
+        {
+            sr.flipY = false;
+        }
+        else if (Input.GetAxis("Vertical") < 0)
+        {
+            sr.flipY = true;
+        }
+        else if (Input.GetAxis("Horizontal") > 0)
+        {
+            sr.flipX = false;
+        }
+        else if (Input.GetAxis("Horizontal") < 0)
+        {
+            sr.flipX = true;
         }
 
         rb.position = (rb.position + movement * characterSpeed * Time.fixedDeltaTime * (isRunning ? 1.60f : 1));

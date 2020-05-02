@@ -7,6 +7,7 @@ TagManager:
   - MovementPoint
   - Enemy
   - SuitCase
+  - Clothes
   layers:
   - Default
   - TransparentFX
@@ -16,8 +17,8 @@ TagManager:
   - UI
   - 
   - 
+  - Object
   - Player
-  - 
   - 
   - 
   - 
@@ -47,6 +48,9 @@ TagManager:
   - name: Background
     uniqueID: 2511161583
     locked: 0
-  - name: Player
+  - name: Object
     uniqueID: 3038538663
+    locked: 0
+  - name: Player
+    uniqueID: 3860745009
     locked: 0
