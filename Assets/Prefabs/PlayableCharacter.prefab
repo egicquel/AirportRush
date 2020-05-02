@@ -93,15 +93,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1565567940969601608}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26316a73ecf0cf4438c4cb4b9e55c4f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 397992c816875aa44a5994dab080dd3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isCarryingSuitcase: 0
+  isRunning: 0
   suitcaseWeight: 0
-  characterSpeed: 7
-  velocity: 0
+  characterSpeed: 3
+  speedModificator: 1
   impactLevelRisk: 0
-  losingClothesRisk: 0
+  suitcase: {fileID: 0}
 --- !u!50 &1565567940969601612
 Rigidbody2D:
   serializedVersion: 4
