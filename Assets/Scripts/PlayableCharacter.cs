@@ -33,6 +33,7 @@ public class PlayableCharacter : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private AudioSource audioSource;
+    public int suitcaseMaxWeight = 1000;
 
 
     // Start is called before the first frame update
@@ -46,7 +47,7 @@ public class PlayableCharacter : MonoBehaviour
         isRunning = false;
         isCarryingSuitcase = true;
         animator.SetBool("hasSuitcase", isCarryingSuitcase);
-        suitcaseWeight = 1000;
+        suitcaseWeight = suitcaseMaxWeight;
         this.UpdateVelocity();
     }
 
@@ -278,5 +279,10 @@ public class PlayableCharacter : MonoBehaviour
         generatedCloth.SetWeight(this.clothWeightTab[clothType]);
         generatedCloth.SetNewPosition(clothThrow);
         return generatedCloth;
+    }
+
+    public float GetPercentSuitcaseFill() {
+        Debug.Log(suitcaseWeight + " / " + suitcaseMaxWeight + " = " + 1.0f * suitcaseWeight / suitcaseMaxWeight);
+        return 1.0f * suitcaseWeight / suitcaseMaxWeight;
     }
 }

@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
     private Text timerText = default;
     [SerializeField]
     private GameObject introScreen = default;
+    [SerializeField]
+    private PlayableCharacter player = default;
+    [SerializeField]
+    private Slider sliderSuitcase = default;
 
 
 
@@ -57,6 +61,7 @@ public class GameManager : MonoBehaviour
                 return;
             }
             timerText.text = SecondsToText(timer);
+            sliderSuitcase.value = player.GetPercentSuitcaseFill();
         }
     }
 
