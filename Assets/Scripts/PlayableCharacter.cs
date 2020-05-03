@@ -19,11 +19,7 @@ public class PlayableCharacter : MonoBehaviour
     [SerializeField]
     public float fallenTime = 0.8f;
     [SerializeField]
-    [Range(0f, 1f)]
-    public float steadinessMax = 1f;
-    [SerializeField]
-    [Range(0f, 1f)]
-    public float steadinessMin = 0.1f;
+    private GameObject suitcase;
 
     private bool isOnTheGround = false;
     private bool isUnstable = false;
@@ -32,8 +28,6 @@ public class PlayableCharacter : MonoBehaviour
     private Vector2 movement;
     private Rigidbody2D rb;
     private Animator animator;
-    private SpriteRenderer sr;
-    [SerializeField] public GameObject suitcase;
 
 
     // Start is called before the first frame update
@@ -41,9 +35,8 @@ public class PlayableCharacter : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
 
-        steadiness = steadinessMin;
+        steadiness = 0.1f;
         isRunning = false;
         isCarryingSuitcase = true;
         animator.SetBool("hasSuitcase", isCarryingSuitcase);
@@ -63,14 +56,14 @@ public class PlayableCharacter : MonoBehaviour
         }
 
         //Event Listener Suitcase
-        if (Input.GetButtonDown("DropSuitcase") && isCarryingSuitcase)
+        /*if (Input.GetButtonDown("DropSuitcase") && isCarryingSuitcase)
         {
             this.DropSuitcase();
         }
         if (Input.GetButtonDown("Interact") && !isCarryingSuitcase)
         {
             this.PickupSuitcase();
-        }
+        }*/
 
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
@@ -100,22 +93,6 @@ public class PlayableCharacter : MonoBehaviour
             }
         }
 
-        if (Input.GetAxis("Vertical") > 0)
-        {
-            sr.flipY = false;
-        }
-        else if (Input.GetAxis("Vertical") < 0)
-        {
-            sr.flipY = true;
-        }
-        else if (Input.GetAxis("Horizontal") > 0)
-        {
-            sr.flipX = false;
-        }
-        else if (Input.GetAxis("Horizontal") < 0)
-        {
-            sr.flipX = true;
-        }
         rb.position = (rb.position + movement * characterSpeed * Time.fixedDeltaTime * (isRunning ? 1.60f : 1));*/
 
         if (isOnTheGround) {
@@ -159,7 +136,7 @@ public class PlayableCharacter : MonoBehaviour
         if (isUnstable && !cannotFall) {
             Fall();
         }
-        else if (isRunning && isCarryingSuitcase) {
+        else if (isRunning) {
             BecomeUnstable(unstableTime, 0.5f);
         }
     }
@@ -197,14 +174,19 @@ public class PlayableCharacter : MonoBehaviour
         isUnstable = false;
         animator.SetBool("isUnstable", isUnstable);
         animator.SetBool("isFallen", isOnTheGround);
-        DropSuitcase();
+        LooseSuitcase();
         LoseClothes();
         Invoke("GetUp", fallenTime);
     }
 
     private void GetUp() {
         isOnTheGround = false;
+        suitcase.SetActive(false);
         animator.SetBool("isFallen", isOnTheGround);
+    }
+
+    private void LooseSuitcase() {
+        suitcase.SetActive(true);
     }
 
     // Charactere lost his Suitcase and refresh velocity
