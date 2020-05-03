@@ -5,13 +5,13 @@ using UnityEngine;
 public class EndReceptionistStuff : MonoBehaviour
 {
     [SerializeField]
-    private EndReceptionist receptionist1;
+    private EndReceptionist receptionist1 = default;
     [SerializeField]
-    private EndReceptionist receptionist2;
+    private EndReceptionist receptionist2 = default;
     [SerializeField]
-    private EndReceptionist receptionist3;
+    private EndReceptionist receptionist3 = default;
     [SerializeField]
-    private EndReceptionist receptionist4;
+    private EndReceptionist receptionist4 = default;
 
     // Start is called before the first frame update
     void Start()
