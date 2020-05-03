@@ -17,10 +17,13 @@ public class GameManager : MonoBehaviour
     private ReceptionistStuff receptionistStuff = default;
     [SerializeField]
     private Text timerText = default;
+    [SerializeField]
+    private GameObject introScreen = default;
 
-    
-    
+
+
     private float timer;
+    private bool gameStarted = false;
     private bool isPlaying = false;
 
     // Start is called before the first frame update
@@ -30,12 +33,22 @@ public class GameManager : MonoBehaviour
         endReceptionistStuff.SetGoodReceptionist(randomGood);
         receptionistStuff.SetGoodDoor(randomGood);
         timer = gameTime;
-        StartGame();
+        introScreen.SetActive(true);
+        Time.timeScale = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!gameStarted) {
+            if (Input.GetButtonDown("Interact")) {
+                StartGame();
+            }
+            else {
+                return;
+            }
+        }
+        
         if (isPlaying) {
             timer -= Time.deltaTime;
             if (timer <= 0) {
@@ -48,7 +61,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void StartGame() {
+        gameStarted = true;
         isPlaying = true;
+        introScreen.SetActive(false);
+        Time.timeScale = 1;
     }
 
     private string SecondsToText(float time) {
