@@ -212,6 +212,7 @@ public class PlayableCharacter : MonoBehaviour
     public void StartRunning()
     {
         isRunning = true;
+        animator.SetBool("isRunning", isRunning);
         this.UpdateVelocity();
     }
 
@@ -219,6 +220,7 @@ public class PlayableCharacter : MonoBehaviour
     public void StopRunning()
     {
         isRunning = false;
+        animator.SetBool("isRunning", isRunning);
         this.UpdateVelocity();
     }
 
