@@ -229,6 +229,10 @@ public class PlayableCharacter : MonoBehaviour
     {
         Cloth lostCloth = this.GenerateRandomCloth();
         suitcaseWeight -= lostCloth.GetWeight();
+        if (suitcaseWeight < 0)
+        {
+            this.PickupClothes(lostCloth);
+        }
         this.UpdateVelocity();
     }
 
