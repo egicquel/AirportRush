@@ -270,11 +270,11 @@ public class PlayableCharacter : MonoBehaviour
     //Generate a cloth and his throw destination and return it
     private Cloth GenerateRandomCloth()
     {
-        int clothType = Random.Range(0, 3);
-        Vector3 clothThrow = new Vector3(Random.Range(2,6), Random.Range(2,6), 0);
-        Cloth generatedCloth = Instantiate(clothTab[clothType]).GetComponent<Cloth>();
+        int clothType = Random.Range(0, clothTab.Length);
+        Vector3 clothThrow = new Vector3(transform.position.x + Random.Range(2,4), transform.position.y + Random.Range(2,4), 0);
+        Cloth generatedCloth = Instantiate(clothTab[clothType], transform.position, Quaternion.identity).GetComponent<Cloth>();
         generatedCloth.SetWeight(this.clothWeightTab[clothType]);
-        generatedCloth.transform.position = transform.position + clothThrow;
+        generatedCloth.SetNewPosition(clothThrow);
         return generatedCloth;
     }
 }

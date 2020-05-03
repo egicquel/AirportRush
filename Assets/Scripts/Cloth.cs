@@ -5,6 +5,9 @@ using UnityEngine;
 public class Cloth : Object
 {
     private int weight;
+    private Vector3 destination;
+    private float travelSpeed = 4f;
+    private Vector3 smoothedPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +17,14 @@ public class Cloth : Object
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(player);
+        Debug.Log(destination);
+        Debug.Log(transform.position);
+        if (transform.position != destination)
+        {
+            smoothedPosition = Vector3.Lerp(this.transform.position, destination, travelSpeed * Time.deltaTime);
+            transform.position = smoothedPosition;
+
+        }
         if (IsInRange())
         {
             if (Input.GetButtonDown("Interact"))
@@ -29,6 +39,10 @@ public class Cloth : Object
         weight = w;
     }
 
+    public void SetNewPosition(Vector3 pos)
+    {
+        destination = pos;
+    }
     public int GetWeight()
     {
         return weight;
