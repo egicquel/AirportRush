@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3514436808211124634}
   - component: {fileID: 7338494696405625002}
   - component: {fileID: 6928336612609386494}
-  - component: {fileID: 1455225828291895273}
+  - component: {fileID: -3310647498354513104}
   m_Layer: 0
   m_Name: StaticEnemy
   m_TagString: Enemy
@@ -123,8 +123,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ce226c9d117963d4d8b8756f8e8c5919, type: 3}
   - {fileID: 21300000, guid: 6b48299dd65ac344d8e3a0e93c609769, type: 3}
   grumpyDuration: 2
---- !u!61 &1455225828291895273
-BoxCollider2D:
+--- !u!58 &-3310647498354513104
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -137,15 +137,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
-    newSize: {x: 0.2, y: 0.2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2673988, y: 0.5650368}
-  m_EdgeRadius: 0
+  m_Radius: 0.65

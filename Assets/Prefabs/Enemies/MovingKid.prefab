@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 495737770955889651}
   - component: {fileID: 495737770955889650}
   - component: {fileID: 495737770955889660}
-  - component: {fileID: 4411584374399092906}
+  - component: {fileID: 6394428699391626091}
   m_Layer: 0
   m_Name: MovingKid
   m_TagString: Enemy
@@ -205,8 +205,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &4411584374399092906
-BoxCollider2D:
+--- !u!58 &6394428699391626091
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -218,19 +218,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010228038, y: -0.081871}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 0.2, y: 0.2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.8929589, y: 0.33917993}
-  m_EdgeRadius: 0
+  m_Radius: 0.5
 --- !u!1 &495737771156160947
 GameObject:
   m_ObjectHideFlags: 0

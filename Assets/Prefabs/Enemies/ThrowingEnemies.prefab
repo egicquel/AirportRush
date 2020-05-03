@@ -107,8 +107,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4912980348088161889}
   - component: {fileID: 1469482177}
-  - component: {fileID: 1469482176}
   - component: {fileID: 1552653390}
+  - component: {fileID: 2519539232735762749}
   m_Layer: 0
   m_Name: Kid2
   m_TagString: Untagged
@@ -152,32 +152,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &1469482176
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4912980348088161890}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.6458796, y: -0.018733054}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.2}
-    newSize: {x: 0.2, y: 0.2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.389472, y: 0.9814442}
-  m_EdgeRadius: 0
 --- !u!114 &1552653390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +165,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySprites: []
+--- !u!58 &2519539232735762749
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912980348088161890}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.39373195, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3751582
 --- !u!1 &4912980348095493844
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,8 +302,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4912980348248869695}
   - component: {fileID: 848020890}
-  - component: {fileID: 848020889}
   - component: {fileID: 716535312}
+  - component: {fileID: 6510186062171187686}
   m_Layer: 0
   m_Name: Kid1
   m_TagString: Untagged
@@ -357,32 +347,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &848020889
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4912980348248869688}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.6132543, y: 0.00618279}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.2}
-    newSize: {x: 0.2, y: 0.2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.37978053, y: 0.86160135}
-  m_EdgeRadius: 0
 --- !u!114 &716535312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,6 +360,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySprites: []
+--- !u!58 &6510186062171187686
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4912980348248869688}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.39442182, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3935206
 --- !u!1 &4912980349232618262
 GameObject:
   m_ObjectHideFlags: 0
