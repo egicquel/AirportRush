@@ -22,6 +22,10 @@ public class Receptionist : MonoBehaviour
     [SerializeField]
     private Sprite[] talkingSprites = default;
     [SerializeField]
+    private AudioClip[] talkingSounds = default;
+    [SerializeField]
+    private AudioClip DoneSound = default;
+    [SerializeField]
     private UnityEvent eventOnDone = default;
     [SerializeField]
     private Sprite[] doorSprites = default;
@@ -32,6 +36,8 @@ public class Receptionist : MonoBehaviour
     private float divisionForTalkingSprite = 1f;
     private SpriteRenderer talkingSpriteRenderer;
     private SpriteRenderer doorIndicationSpriteRenderer = default;
+    private AudioSource audioSource;
+    private int indexCompletion = 0;
     private int goodDoor;
 
     // Start is called before the first frame update
@@ -47,6 +53,7 @@ public class Receptionist : MonoBehaviour
         doorIndicationSpriteRenderer = doorIndication.GetComponent<SpriteRenderer>();
         doorIndication.SetActive(false);
         divisionForTalkingSprite = (validationTime * 1f) / talkingSprites.Length;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -59,7 +66,10 @@ public class Receptionist : MonoBehaviour
         if (playerInsideValidationZone) {
             validationTimer -= Time.deltaTime;
             int indexSprite = (int)((validationTime - validationTimer) / divisionForTalkingSprite);
-            if (indexSprite < talkingSprites.Length) {
+            if (indexCompletion != indexSprite && indexSprite < talkingSprites.Length) {
+                indexCompletion = indexSprite;
+                audioSource.clip = talkingSounds[indexSprite - 1];
+                audioSource.Play();
                 talkingSpriteRenderer.sprite = talkingSprites[indexSprite];
             }
             if (validationTimer <= 0) {
@@ -103,6 +113,8 @@ public class Receptionist : MonoBehaviour
         talking.SetActive(false);
         done.SetActive(true);
         doorIndication.SetActive(true);
+        audioSource.clip = DoneSound;
+        audioSource.Play();
         eventOnDone.Invoke();
     }
 }

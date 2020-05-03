@@ -25,13 +25,21 @@ public class EndReceptionist : MonoBehaviour
     private GameObject arrow = default;
     [SerializeField]
     private Sprite[] talkingSprites = default;
+    [SerializeField]
+    private AudioClip[] talkingSounds = default;
+    [SerializeField]
+    private AudioClip DoneSound = default;
+    [SerializeField]
+    private AudioClip WrongSound = default;
 
     private float validationTimer;
     private bool playerInsideValidationZone = false;
     private bool isDone = false;
     private float divisionForTalkingSprite = 1f;
     private SpriteRenderer talkingSpriteRenderer;
+    private AudioSource audioSource;
     private bool isGood = false;
+    private int indexCompletion = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +52,7 @@ public class EndReceptionist : MonoBehaviour
         talkingSpriteRenderer = talking.GetComponent<SpriteRenderer>();
         talking.SetActive(false);
         divisionForTalkingSprite = (validationTime * 1f) / talkingSprites.Length;
+        audioSource = GetComponentInChildren<AudioSource>();
     }
 
     // Update is called once per frame
@@ -56,7 +65,10 @@ public class EndReceptionist : MonoBehaviour
         if (playerInsideValidationZone) {
             validationTimer -= Time.deltaTime;
             int indexSprite = (int)((validationTime - validationTimer) / divisionForTalkingSprite);
-            if (indexSprite < talkingSprites.Length) {
+            if (indexCompletion != indexSprite && indexSprite < talkingSprites.Length) {
+                indexCompletion = indexSprite;
+                audioSource.clip = talkingSounds[indexSprite - 1];
+                audioSource.Play();
                 talkingSpriteRenderer.sprite = talkingSprites[indexSprite];
             }
             if (validationTimer <= 0) {
@@ -94,9 +106,13 @@ public class EndReceptionist : MonoBehaviour
             done.SetActive(true);
             invisibleWall.SetActive(false);
             arrow.SetActive(true);
+            audioSource.clip = DoneSound;
+            audioSource.Play();
         }
         else {
             wrong.SetActive(true);
+            audioSource.clip = WrongSound;
+            audioSource.Play();
         }
     }
 }

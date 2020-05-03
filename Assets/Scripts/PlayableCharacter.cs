@@ -20,6 +20,10 @@ public class PlayableCharacter : MonoBehaviour
     public float fallenTime = 0.8f;
     [SerializeField]
     private GameObject suitcase;
+    [SerializeField]
+    private AudioClip unstableSound;
+    [SerializeField]
+    private AudioClip chocSound;
 
     private bool isOnTheGround = false;
     private bool isUnstable = false;
@@ -28,6 +32,7 @@ public class PlayableCharacter : MonoBehaviour
     private Vector2 movement;
     private Rigidbody2D rb;
     private Animator animator;
+    private AudioSource audioSource;
 
 
     // Start is called before the first frame update
@@ -35,6 +40,7 @@ public class PlayableCharacter : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
         steadiness = 0.1f;
         isRunning = false;
@@ -156,6 +162,9 @@ public class PlayableCharacter : MonoBehaviour
         isUnstable = true;
         cannotFall = true;
         animator.SetBool("isUnstable", isUnstable);
+        audioSource.loop = true;
+        audioSource.clip = unstableSound;
+        audioSource.Play();
         Invoke("BecomeStable", tUnstable);
         Invoke("EndInvulnerability", tInvulnerability);
     }
@@ -163,6 +172,8 @@ public class PlayableCharacter : MonoBehaviour
     private void BecomeStable() {
         isUnstable = false;
         animator.SetBool("isUnstable", isUnstable);
+        audioSource.loop = false;
+        audioSource.Stop();
     }
 
     private void EndInvulnerability() {
@@ -176,6 +187,9 @@ public class PlayableCharacter : MonoBehaviour
         animator.SetBool("isFallen", isOnTheGround);
         LooseSuitcase();
         LoseClothes();
+        audioSource.loop = false;
+        audioSource.clip = chocSound;
+        audioSource.Play();
         Invoke("GetUp", fallenTime);
     }
 

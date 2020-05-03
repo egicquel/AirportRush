@@ -23,11 +23,13 @@ public class SecurityGuardReceptionist : MonoBehaviour
     private bool allowPlayer = false;
 
     private new Renderer renderer;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start() {
         movementPoints = getMovementPoints();
         renderer = GetComponent<Renderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -106,6 +108,7 @@ public class SecurityGuardReceptionist : MonoBehaviour
             return;
         }
         deny.SetActive(true);
+        audioSource.Play();
     }
 
     public void StopDeny() {

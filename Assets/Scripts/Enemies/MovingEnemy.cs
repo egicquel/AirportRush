@@ -7,8 +7,8 @@ using UnityEngine.Rendering;
 public class MovingEnemy : HumanEnemy {
     [SerializeField]
     private float moveSpeed = 1f;
-    //[SerializeField]
-    //private float rotationSpeed = 180f;
+    [SerializeField]
+    private AudioClip[] grumpySounds = default;
 
     [SerializeField]
     private float grumpyDuration = 1f;
@@ -19,14 +19,19 @@ public class MovingEnemy : HumanEnemy {
     private List<Vector3> movementPoints;
     private int movementPointIndex = 0;
     private bool isForward = true;
+    private bool hasAlreadyBeenHit = false;
 
     private new Renderer renderer;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     new void Start() {
         base.Start();
         movementPoints = getMovementPoints();
         renderer = GetComponent<Renderer>();
+        audioSource = gameObject.GetComponent<AudioSource>();
+        int randomIdSound = UnityEngine.Random.Range(0, grumpySounds.Length);
+        audioSource.clip = grumpySounds[randomIdSound];
     }
 
     // Update is called once per frame
@@ -88,6 +93,10 @@ public class MovingEnemy : HumanEnemy {
     private void OnCollisionEnter2D(Collision2D collision) {
         PlayableCharacter character = collision.collider.gameObject.GetComponent<PlayableCharacter>();
         if (character != null) {
+            if (!hasAlreadyBeenHit) {
+                audioSource.Play();
+                hasAlreadyBeenHit = true;
+            }
             grumpyTimer = grumpyDuration;
             transform.rotation = GetDirectionTowards(character.gameObject.transform.position);
             character.HitAdult();

@@ -6,15 +6,23 @@ public class StaticEnemy : HumanEnemy {
 
     [SerializeField]
     private float grumpyDuration = 1f;
+    [SerializeField]
+    private AudioClip[] grumpySounds = default;
+
+    private AudioSource audioSource;
 
     private bool isGrumpy = false;
     private float grumpyTimer = 0f;
+    private bool hasAlreadyBeenHit = false;
 
     private Quaternion originalRotation;
     
     // Start is called before the first frame update
     new void Start() {
         base.Start();
+        audioSource = gameObject.GetComponent<AudioSource>();
+        int randomIdSound = Random.Range(0, grumpySounds.Length);
+        audioSource.clip = grumpySounds[randomIdSound];
         originalRotation = transform.rotation;
     }
 
@@ -36,6 +44,10 @@ public class StaticEnemy : HumanEnemy {
     private void OnCollisionEnter2D(Collision2D collision) {
         PlayableCharacter character = collision.collider.gameObject.GetComponent<PlayableCharacter>();
         if (character != null) {
+            if (!hasAlreadyBeenHit) {
+                audioSource.Play();
+                hasAlreadyBeenHit = true;
+            }
             grumpyTimer = grumpyDuration;
             transform.rotation = GetDirectionTowards(character.gameObject.transform.position);
             character.HitAdult();
