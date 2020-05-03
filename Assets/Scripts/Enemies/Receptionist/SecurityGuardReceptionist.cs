@@ -16,6 +16,7 @@ public class SecurityGuardReceptionist : MonoBehaviour
     private bool isGrumpy = false;
     private float grumpyTimer = 0f;
 
+    [SerializeField]
     private List<Vector3> movementPoints;
     private int movementPointIndex = 0;
     private bool isMoving = false;
@@ -53,6 +54,7 @@ public class SecurityGuardReceptionist : MonoBehaviour
     private void move() {
         var targetPosition = movementPoints[movementPointIndex];
         var movementThisFrame = moveSpeed * Time.deltaTime;
+        Debug.Log(movementPointIndex);
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, movementThisFrame);
         //var rotationThisFrame = rotationSpeed * Time.deltaTime;
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, GetDirectionTowards(targetPosition), rotationThisFrame);
