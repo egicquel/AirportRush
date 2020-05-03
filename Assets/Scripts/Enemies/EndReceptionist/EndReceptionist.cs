@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Receptionist : MonoBehaviour
+public class EndReceptionist : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField]
@@ -18,34 +18,31 @@ public class Receptionist : MonoBehaviour
     [SerializeField]
     private GameObject done = default;
     [SerializeField]
-    private GameObject doorIndication = default;
+    private GameObject wrong = default;
+    [SerializeField]
+    private GameObject invisibleWall = default;
+    [SerializeField]
+    private GameObject arrow = default;
     [SerializeField]
     private Sprite[] talkingSprites = default;
-    [SerializeField]
-    private UnityEvent eventOnDone = default;
-    [SerializeField]
-    private Sprite[] doorSprites = default;
 
     private float validationTimer;
     private bool playerInsideValidationZone = false;
     private bool isDone = false;
     private float divisionForTalkingSprite = 1f;
     private SpriteRenderer talkingSpriteRenderer;
-    private SpriteRenderer doorIndicationSpriteRenderer = default;
-    private int goodDoor;
+    private bool isGood = false;
 
     // Start is called before the first frame update
     void Start()
     {
         validationTimer = validationTime;
-        exclamation.SetActive(false);
-        done.SetActive(false);
+        exclamation.SetActive(true);
         talking.SetActive(true);
+        done.SetActive(false);
+        arrow.SetActive(false);
         talkingSpriteRenderer = talking.GetComponent<SpriteRenderer>();
         talking.SetActive(false);
-        doorIndication.SetActive(true);
-        doorIndicationSpriteRenderer = doorIndication.GetComponent<SpriteRenderer>();
-        doorIndication.SetActive(false);
         divisionForTalkingSprite = (validationTime * 1f) / talkingSprites.Length;
     }
 
@@ -63,21 +60,13 @@ public class Receptionist : MonoBehaviour
                 talkingSpriteRenderer.sprite = talkingSprites[indexSprite];
             }
             if (validationTimer <= 0) {
-                doorIndicationSpriteRenderer.sprite = doorSprites[goodDoor];
                 Done();
             }
         }
     }
 
-    public void SetGoodDoor(int idGoodDoor) {
-        goodDoor = idGoodDoor;
-    }
-
-    public void CallPlayer() {
-        if (isDone) {
-            return;
-        }
-        exclamation.SetActive(true);
+    public void SetEnableIsGood() {
+        isGood = true;
     }
 
     public void EnterValidationZone() {
@@ -101,8 +90,13 @@ public class Receptionist : MonoBehaviour
     private void Done() {
         isDone = true;
         talking.SetActive(false);
-        done.SetActive(true);
-        doorIndication.SetActive(true);
-        eventOnDone.Invoke();
+        if (isGood) {
+            done.SetActive(true);
+            invisibleWall.SetActive(false);
+            arrow.SetActive(true);
+        }
+        else {
+            wrong.SetActive(true);
+        }
     }
 }

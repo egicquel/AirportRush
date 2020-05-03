@@ -17,8 +17,6 @@ public class Cloth : Object
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(destination);
-        Debug.Log(transform.position);
         if (transform.position != destination)
         {
             smoothedPosition = Vector3.Lerp(this.transform.position, destination, travelSpeed * Time.deltaTime);

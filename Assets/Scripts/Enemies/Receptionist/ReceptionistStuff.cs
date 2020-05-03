@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class ReceptionistStuff : MonoBehaviour
 {
+    [SerializeField]
     private Receptionist receptionist;
     private SecurityGuardReceptionist[] guards;
     
     // Start is called before the first frame update
     void Start()
     {
-        receptionist = gameObject.GetComponentInChildren<Receptionist>();
+        //receptionist = gameObject.GetComponentInChildren<Receptionist>();
         guards = gameObject.GetComponentsInChildren<SecurityGuardReceptionist>();
     }
 
@@ -18,6 +19,10 @@ public class ReceptionistStuff : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetGoodDoor(int idGoodDoor) {
+        receptionist.SetGoodDoor(idGoodDoor);
     }
 
     public void TriggerReceptionistCall() {
