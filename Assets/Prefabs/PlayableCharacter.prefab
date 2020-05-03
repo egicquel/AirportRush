@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -434222287
-  m_SortingLayer: 3
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 22a8819db8352c8458befc7766adf698, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -97,11 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397992c816875aa44a5994dab080dd3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clothWeightTab:
-  - {fileID: 2824581839395357311, guid: 86f6fa9d62f20964f95cf1b5c7b60e40, type: 3}
-  - {fileID: 5202032105994809114, guid: 4e1c8e634ee9f6549b57a8f57cf3a812, type: 3}
-  - {fileID: 7615580061652627385, guid: 7bc4fa26f52d9934db67ad8425da9864, type: 3}
-  - {fileID: 6483852314460273821, guid: c4f7738d1310a3c4bb8cf560afe215ef, type: 3}
+  clothTab: []
   isCarryingSuitcase: 0
   isRunning: 0
   suitcaseWeight: 0
