@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,11 +21,21 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject introScreen = default;
     [SerializeField]
+    private GameObject wonScreen = default;
+    [SerializeField]
+    private GameObject lostScreen = default;
+    [SerializeField]
+    private GameObject finalScreen = default;
+    [SerializeField]
     private PlayableCharacter player = default;
     [SerializeField]
     private Slider sliderSuitcase = default;
-
-
+    [SerializeField]
+    private TextMeshProUGUI scoreText = default;
+    [SerializeField]
+    private TextMeshProUGUI scoreTimeText = default;
+    [SerializeField]
+    private TextMeshProUGUI scoreClothesText = default;
 
     private float timer;
     private bool gameStarted = false;
@@ -52,12 +63,25 @@ public class GameManager : MonoBehaviour
                 return;
             }
         }
+
+        if (gameStarted && !isPlaying) {
+            if (Input.GetButtonDown("Interact")) {
+                if (wonScreen.activeSelf) {
+                    wonScreen.SetActive(false);
+                    finalScreen.SetActive(true);
+                }
+                else {
+                    Scene scene = SceneManager.GetActiveScene();
+                    SceneManager.LoadScene(scene.name);
+                }
+            }
+        }
         
         if (isPlaying) {
             timer -= Time.deltaTime;
             if (timer <= 0) {
                 timerText.text = SecondsToText(0);
-                isPlaying = false;
+                Lost();
                 return;
             }
             timerText.text = SecondsToText(timer);
@@ -72,7 +96,25 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void Lost() {
+        isPlaying = false;
+        lostScreen.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void Won() {
+        isPlaying = false;
+        Time.timeScale = 0;
+        int score = (int)(timer * 1000 * player.GetPercentSuitcaseFill());
+        int scoreTime = (int)(timer * 1000);
+        int scoreLost = scoreTime - score;
+        scoreText.text = "Score : " + score;
+        scoreTimeText.text = "Time left : +" + scoreTime;
+        scoreClothesText.text = "Missing : -" + scoreLost;
+        wonScreen.SetActive(true);
+    }
+
     private string SecondsToText(float time) {
-        return (int)(time / 60) + ":" + (int)(time % 60);
+        return string.Format("{0}:{1:00}", (int)(time / 60), (int)(time % 60));
     }
 }

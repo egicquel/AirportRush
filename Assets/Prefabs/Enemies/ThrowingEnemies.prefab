@@ -110,9 +110,9 @@ GameObject:
   - component: {fileID: 1552653390}
   - component: {fileID: 2519539232735762749}
   - component: {fileID: 7706911375873365578}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Kid2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -290,9 +290,9 @@ GameObject:
   - component: {fileID: 4912980348095493850}
   - component: {fileID: 285435009}
   - component: {fileID: 796279186}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -376,7 +376,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.00000011920929, y: 0}
   serializedVersion: 2
-  m_Radius: 0.08
+  m_Radius: 0.23
 --- !u!114 &796279186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,9 +402,9 @@ GameObject:
   - component: {fileID: 716535312}
   - component: {fileID: 6510186062171187686}
   - component: {fileID: 1866515441869679424}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Kid1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -282,7 +282,6 @@ public class PlayableCharacter : MonoBehaviour
     }
 
     public float GetPercentSuitcaseFill() {
-        Debug.Log(suitcaseWeight + " / " + suitcaseMaxWeight + " = " + 1.0f * suitcaseWeight / suitcaseMaxWeight);
         return 1.0f * suitcaseWeight / suitcaseMaxWeight;
     }
 }
